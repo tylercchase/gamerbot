@@ -4,7 +4,7 @@ const client = new Discord.Client();
 let presence = new Discord.ClientPresence(client,{game: 'How moist can a boi get?'})
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setPresence(presence)
+    client.user.setPresence({game: {name: 'How moist can a boi get?'}})
 });
 client.on('message',async msg => {
     splitStuff = msg.content.split(' ');
@@ -29,7 +29,7 @@ client.on('message',async msg => {
                 }
                 else {
                     if(Array.isArray(roll)){
-                        rolls[index] = Math.floor(Math.random() * roll[1]) + 1;
+                        rolls[index] = Math.floor(Math.random() * Number(roll[0])) + 1;
                     }
                     else {
                         rolls[index] = Math.floor(Math.random() * roll) + 1;
@@ -56,7 +56,7 @@ client.on('message',async msg => {
             }
         });
         if(output){
-            msg.channel.send(output);
+            msg.reply(output);
         }
     }
     if (msg.content === 'ping') {
