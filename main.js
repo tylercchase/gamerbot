@@ -8,7 +8,7 @@ client.on('ready', () => {
 });
 client.on('message',async msg => {
     splitStuff = msg.content.split(' ');
-    if(splitStuff[0] == "!roll"){
+    if(splitStuff[0] == "!roll" || splitStuff[0] == '!r'){
         let rolls = [];
         splitStuff = splitStuff.slice(1);
         splitStuff.forEach((roll,index) => {
@@ -18,7 +18,6 @@ client.on('message',async msg => {
             }
             if(roll <= 0){ 
             }
-            console.log('After',roll)
             if(roll.length <= 2 && roll.length != 0){
                 if(roll.length != 1  && Array.isArray(roll)){
                     let indiv = [];
@@ -39,15 +38,18 @@ client.on('message',async msg => {
         });
         let output = ''
         rolls.forEach(roll => {
-            console.log(roll);
             if(Array.isArray(roll)){
-                output += (roll.join(', '));
+                if(roll.length <= 20){
+                    output += (roll.join(', '));
+                }
+                else {
+                    output += 'Alot of numbers...';
+                }
                 output += (' = ');
                 output += roll.reduce((a, b) => a + b);
                 output += ('\n');
             }
             else{
-                console.log(typeof(roll));
                 if(Number.isInteger(roll))
                 {
                     output += roll;
