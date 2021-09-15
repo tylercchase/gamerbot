@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const {token} = require('./config.json');
+const {movieCommand} = require('./spreadsheets')
 const client = new Discord.Client();
 let presence = new Discord.ClientPresence(client,{game: 'How moist can a boi get?'})
 client.on('ready', () => {
@@ -60,6 +61,9 @@ client.on('message',async msg => {
         if(output){
             msg.reply(output);
         }
+    } else if(splitStuff[0] == "!suggest"){
+        movieCommand(splitStuff[1])
+        msg.react('👍')
     }
     if (msg.content === 'ping') {
       msg.reply('pong');
